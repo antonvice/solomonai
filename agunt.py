@@ -381,7 +381,9 @@ class LegalGPT(Chain):
         self.conversation_history.append(human_input)
 
     def step(self) :
-        self._call(inputs={})
+        res = self._call(inputs={})
+        return res
+        
 
     def _call(self, inputs: Dict[str, Any]) -> None:
         """Run one step of the legal agent."""
@@ -422,7 +424,7 @@ class LegalGPT(Chain):
             ai_message += " <END_OF_TURN>"
         self.conversation_history.append(ai_message)
 
-        return {}
+        return {}, ai_message
 
     @classmethod
     def from_llm(cls, llm: BaseLLM, verbose: bool = False, **kwargs) -> "LegalGPT":

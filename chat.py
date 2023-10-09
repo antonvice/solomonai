@@ -47,6 +47,6 @@ async def main(message):
     print("Message", message,"CHAIN",llm_chain)
     llm_chain.human_step(message)
     llm_chain.determine_conversation_stage()
-    llm_chain.step()
+    res = llm_chain.step()
     
-    await cl.Message(content='s').send()
+    await cl.Message(content=res).send()
